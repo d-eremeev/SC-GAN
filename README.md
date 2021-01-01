@@ -7,7 +7,7 @@
 <img src=images/header.jpg alt="alt text" width=1000>
 
 
-## Main ideas:
+## Main ideas
 
 The authors of the paper consider the task of predicting future movement of traffic actors. 
 
@@ -19,7 +19,7 @@ the discriminator’s job. Authors suggest to fuse past observed states of the a
 
 Authors claim that SC-GAN outperforms the existing state-of-the-art generative approaches.
 
-## Architecture:
+## Architecture
 
 <img src=images/model_architecture.jpg>
 
