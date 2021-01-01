@@ -24,11 +24,12 @@ Authors claim that SC-GAN outperforms the existing state-of-the-art generative a
 <img src=images/model_architecture.jpg>
 
 ## Implementation details
+- Details and results can be found in `Slides/SC_GAN Slides.pdf`.
 - We use a part of Lyft Level 5 Prediction dataset from <a href="https://github.com/lyft/l5kit">l5kit</a> package for training and validation. One can easily get this dataset from <a href="https://www.kaggle.com/c/lyft-motion-prediction-autonomous-vehicles/data">Kaggle</a>.
 - Initially we use a built-in <a href="https://github.com/lyft/l5kit">l5kit</a> rasterizer to generate a sequence of images for ego-car and agents, as well as images for a scene in different channels. Then we apply custom rasterizer to produce a single RGB image for a scene, as mentioned in article.
 - We select only moving (**non-static**) cars for prediction. This is achieved by passing a custom mask to l5kit dataset class. We consider cars which drove less than 5 meters over past second to be static.
 - We haven't included velocities in actor states since they were not available in the l5kit's early versions. To handle this we made it possible to use 1D convolutions with LSTM in encoder. The velocities should be added in later version of the package.
-- **Warning!** If one is planning to use later version of <a href="https://github.com/lyft/l5kit">l5kit</a>, he/she should consider all modifications in l5kit. We can specify 2 major changes affecting our project:
+- **Warning!** If one plans to use later version of <a href="https://github.com/lyft/l5kit">l5kit</a>, he/she should consider all modifications in l5kit. We can specify 2 major changes affecting our project:
   1. There were some troubles with rotation angle for history/target positions in l5kit dataset which required additional change of coordinates in code. This transformation should be included in later versions of l5kit, which leads to small changes in `transform` method of `TransformDataset` class.  
   2. l5kit team tends to change config file structure over time so one should keep it in mind. 
 
