@@ -32,6 +32,11 @@ Authors claim that SC-GAN outperforms the existing state-of-the-art generative a
 - **Warning!** If one plans to use later version of <a href="https://github.com/lyft/l5kit">l5kit</a>, he/she should consider all modifications in l5kit. We can specify 2 major changes affecting our project:
   1. There were some troubles with rotation angle for history/target positions in l5kit dataset which required additional change of coordinates in code. This transformation should be included in later versions of l5kit, which leads to small changes in `transform` method of `TransformDataset` class.  
   2. l5kit team tends to change config file structure over time so one should keep it in mind. 
+- **Warning!** The code was written for **Unix**. While running the code on **Windows**, we faced several bugs:
+  1. `num_workers` should equal to 0 (https://stackoverflow.com/questions/53974351/pytorch-getting-started-example-not-working)
+  2. bug in l5kit, changes required (https://github.com/lyft/l5kit/issues/129)
+  3. torch==1.7.1 worked stable
+  
 
 ## Example
 
