@@ -1,0 +1,72 @@
+device: cuda:0
+l5kit_data_folder: /home/Lyft_data
+model_name: SCGAN
+model_params:
+  future_delta_time: 0.1
+  future_num_frames: 40
+  future_step_size: 1
+  history_delta_time: 0.1
+  history_num_frames: 4
+  history_step_size: 1
+  history_fading_weight: 0.9
+raster_params:
+  ego_center:
+  - 0.25
+  - 0.5
+  pixel_size:
+  - 0.2
+  - 0.2
+  raster_size:
+  - 300
+  - 300
+  map_type: py_semantic
+  filter_agents_threshold: 0.5
+  dataset_meta_key: meta.json
+  satellite_map_key: aerial_map/aerial_map.png
+  semantic_map_key: semantic_map/semantic_map.pb
+train_data_loader:
+  batch_size: 16
+  key: scenes/train.zarr
+  num_workers: 8
+  shuffle: true
+  mask_path: /home/Lyft_data/custom_masks/mask_moving.npy
+  subset: -1
+valid_data_loader:
+  batch_size: 32
+  key: scenes/validate.zarr
+  num_workers: 8
+  shuffle: false
+  mask_path: /home/Lyft_data/custom_masks/val_mask_moving.npy
+  subset: -1
+train_params:
+  checkpoint_every_n_steps: 1000
+  print_every_n_steps: 100
+  num_epochs: 10
+  num_d_steps: 3
+  num_g_steps: 1
+  g_learning_rate: 0.0001
+  d_learning_rate: 0.0001
+  image_sample_dir: /home/images_output
+gan_params:
+  gan_type: wasserstein_gp
+  backbone_type: mobilenet
+  embedding_type: lstm
+  input_dim: 33
+  embedding_dim: 128
+  noise_dim: 128
+  decoder_dim: 4096
+  sigma: 2
+  num_disc_feats: 64
+  weight_clip: 0.01
+losses:
+  lambda_gp: 10
+  use_variety_l2: true
+  variety_l2_mode: average
+  weight_variety_l2: 1.0
+  k_min: 3
+
+hydra:
+  run:
+    dir: outputs/${model_name}/${now:%Y-%m-%d-%H-%M}
+  output_subdir: hydra
+
