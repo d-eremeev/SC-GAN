@@ -1,0 +1,10 @@
+numpy==1.18.5
+pandas==1.1.4
+matplotlib==3.3.2
+seaborn==0.11.0
+tqdm==4.51.0
+torch==1.5.1
+torchvision==0.6.1
+efficientnet_pytorch==0.7.0
+l5kit==1.0.6
+hydra==1.0.3
